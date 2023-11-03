@@ -3,6 +3,7 @@ import { postRequest, PostRequestResult } from './utils/httpUtils'
 
 // --- FACTURACION API ---
 const baseUrl = 'https://lavu-facturacion-api-d8146475889b.herokuapp.com'
+// const baseUrl = 'http://localhost:8080'
 
 const login = async (locacion: string): Promise<PostRequestResult> => {
   const username = process.env[`${locacion}_FACTURACION_API_USER`]
@@ -21,7 +22,7 @@ export async function enviarCierre(locacion: string) {
 }
 
 // --- CRON JOB ---
-cron.schedule('00 14 * * *', async () => {
+cron.schedule('45 4 * * *', async () => {
   await enviarCierre('TLN')
   await enviarCierre('CASCO')
   await enviarCierre('BOCAS')
