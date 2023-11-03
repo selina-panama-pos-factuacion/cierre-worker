@@ -22,7 +22,7 @@ export async function enviarCierre(locacion: string) {
 }
 
 // --- CRON JOB ---
-cron.schedule('45 4 * * *', async () => {
+cron.schedule('00 11 * * *', async () => {
   await enviarCierre('TLN')
   await enviarCierre('CASCO')
   await enviarCierre('BOCAS')
