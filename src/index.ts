@@ -28,4 +28,6 @@ cron.schedule('00 11 * * *', async () => {
   await enviarCierre('BOCAS')
   await enviarCierre('BOQUETE')
   await enviarCierre('REDFROG')
+  await enviarCierre('VENAO')
+  await enviarCierre('VENAOTIPI')
 })
