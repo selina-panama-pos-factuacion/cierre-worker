@@ -1,4 +1,3 @@
-import cron from 'node-cron'
 import { postRequest, PostRequestResult } from './utils/httpUtils'
 
 // --- FACTURACION API ---
@@ -15,19 +14,18 @@ const login = async (locacion: string): Promise<PostRequestResult> => {
   return result
 }
 
-export async function enviarCierre(locacion: string) {
+async function enviarCierre(locacion: string) {
   const { token } = await login(locacion)
   const result = await postRequest(`${baseUrl}/facturarCierreDeDia`, token)
   console.log(result)
 }
 
-// --- CRON JOB ---
-cron.schedule('00 11 * * *', async () => {
-  await enviarCierre('TLN')
-  await enviarCierre('CASCO')
-  await enviarCierre('BOCAS')
-  await enviarCierre('BOQUETE')
-  await enviarCierre('REDFROG')
-  await enviarCierre('VENAO')
-  await enviarCierre('VENAOTIPI')
-})
+// --- PROCESO DE CIERRES ---
+
+enviarCierre('TLN')
+enviarCierre('CASCO')
+enviarCierre('BOCAS')
+enviarCierre('BOQUETE')
+enviarCierre('REDFROG')
+enviarCierre('VENAO')
+enviarCierre('VENAOTIPI')
