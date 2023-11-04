@@ -7,15 +7,25 @@ const baseUrl = 'https://lavu-facturacion-api-d8146475889b.herokuapp.com'
 const login = async (locacion: string): Promise<PostRequestResult> => {
   const username = process.env[`${locacion}_FACTURACION_API_USER`]
   const password = process.env[`${locacion}_FACTURACION_API_PASS`]
-  const result = await postRequest(`${baseUrl}/login`, undefined, {
-    username,
-    password,
-  })
-  return result
+  try {
+    const result = await postRequest(`${baseUrl}/login`, undefined, {
+      username,
+      password,
+    })
+    return result
+  } catch (error) {
+    console.log(error)
+    return { error: JSON.stringify(error) }
+  }
 }
 
 async function enviarCierre(locacion: string) {
-  const { token } = await login(locacion)
+  const loginResult = await login(locacion)
+  if (loginResult.error) {
+    console.log(loginResult.error)
+    return
+  }
+  const { token } = loginResult
   const result = await postRequest(`${baseUrl}/facturarCierreDeDia`, token)
   console.log(result)
 }
