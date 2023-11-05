@@ -4,9 +4,9 @@ import { postRequest, PostRequestResult } from './utils/httpUtils'
 const baseUrl = 'https://lavu-facturacion-api-d8146475889b.herokuapp.com'
 // const baseUrl = 'http://localhost:8080'
 
-const login = async (locacion: string): Promise<PostRequestResult> => {
-  const username = process.env[`${locacion}_FACTURACION_API_USER`]
-  const password = process.env[`${locacion}_FACTURACION_API_PASS`]
+const login = async (): Promise<PostRequestResult> => {
+  const username = process.env.FACTURACION_API_USER
+  const password = process.env.FACTURACION_API_PASS
   try {
     const result = await postRequest(`${baseUrl}/login`, undefined, {
       username,
@@ -19,8 +19,8 @@ const login = async (locacion: string): Promise<PostRequestResult> => {
   }
 }
 
-async function enviarCierre(locacion: string) {
-  const loginResult = await login(locacion)
+async function enviarCierre() {
+  const loginResult = await login()
   if (loginResult.error) {
     console.log(loginResult.error)
     return
@@ -32,10 +32,4 @@ async function enviarCierre(locacion: string) {
 
 // --- PROCESO DE CIERRES ---
 
-enviarCierre('TLN')
-enviarCierre('CASCO')
-enviarCierre('BOCAS')
-enviarCierre('BOQUETE')
-enviarCierre('REDFROG')
-enviarCierre('VENAO')
-enviarCierre('VENAOTIPI')
+enviarCierre()
