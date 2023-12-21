@@ -39,6 +39,7 @@ export async function postRequest(
       res.on('end', () => {
         try {
           const parsedData: PostRequestResult = JSON.parse(data)
+          console.log('🚀 ~ file: httpUtils.ts:42 ~ res.on ~ data:', data)
           resolve(parsedData)
         } catch (err) {
           reject(new Error('Failed to parse response data.'))
