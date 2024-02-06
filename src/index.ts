@@ -1,7 +1,7 @@
 import { postRequest, PostRequestResult } from './utils/httpUtils'
 
 // --- FACTURACION API ---
-const baseUrl = 'https://lavu-facturacion-api-d8146475889b.herokuapp.com'
+const baseUrl = 'https://lavu-facturacion-backend-production.up.railway.app'
 // const baseUrl = 'http://localhost:8080'
 
 const login = async (): Promise<PostRequestResult> => {
